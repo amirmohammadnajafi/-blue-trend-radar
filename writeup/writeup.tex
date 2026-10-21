@@ -1,0 +1,69 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+\fi
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{Sustainable Digital Rail at BLUE Engineering}
+\author{Amirmohammad Najafi}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Sector Selection and Strategic Justification: Railways}
+This technology radar focuses on the \textbf{Railways} sector (high-speed trains, regional multiple units, trams, metros, rolling stock subsystems, and trackside interfaces). Selecting rail over automotive, aeronautics, or marine is justified by three strategic pillars aligned with BLUE Engineering's heritage, scale, and R\&D portfolio:
+
+\begin{itemize}
+    \item \textbf{Deep Rolling-Stock Heritage and Direct Skill Transfer:} Since contributing to high-speed programmes, BLUE has built core competencies in carbody engineering, bogie design, multi-body dynamics, CFD, crashworthiness, and vehicle homologation that transfer directly to future rail systems.
+    \item \textbf{Cross-Domain Synergy without Project Duplication:} BLUE's R\&D project \textit{SMAIL-AI} (2025--2027, Valle d'Aosta grant with Politecnico di Torino 3DLab, Deval, and CVA) combines UAVs and computer vision for power-line and civil infrastructure monitoring. Its sensor-fusion and AI anomaly-detection pipelines transfer to rail condition monitoring with no project-level duplication; methods are transferable (zero portfolio overlap for bogie twins).
+    \item \textbf{Optimal Fit for Financial Scale:} Registries report $\sim$EUR 18.7M 2025 turnover ($\sim$156 staff), giving $\sim$EUR 560k--750k/year R\&D (3--4\%), leverageable into EUR 2--3M demonstrators via EU co-funding.
+\end{itemize}
+
+\section{Rail Technology Trend Radar (5--10 Year Horizon)}
+Because papers rarely report explicit TRLs, values are author-assessed using European Commission (Horizon Europe FAQ 2890 \href{https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/support/faq/2890}{[1]}) and EURAXESS hardware definitions. Per-trend TRL justifications and full source URLs are in \texttt{data/trends.json}.
+
+\begin{table}[ht!]
+\centering
+\begin{tabularx}{\textwidth}{@{}l p{3.3cm} c l X@{}}
+\toprule
+\textbf{ID} & \textbf{Technology Trend} & \textbf{TRL} & \textbf{Horizon} & \textbf{Description, BLUE Synergy \& Key Evidence} \\
+\midrule
+\textbf{T1} & Hydrogen Fuel-Cell Trains \& Shunting & 7 & Adjacent & H$_2$ fuel-cell traction for non-electrified regional routes and yards. Transfers \textit{B4IA} hydrogen bus integration. \textit{Evidence:} Alstom Coradia iLint 4+ yrs German service (FRA) \& 10k Americas riders \href{https://www.alstom.com/solutions/rolling-stock/alstom-coradia-ilint-worlds-1st-hydrogen-powered-passenger-train}{[5]}. \\
+\textbf{T2*} & \textbf{AI-Driven Bogie Digital Twin (Rec.)} & \textbf{5} & \textbf{Adjacent} & Multimodal sensors (vibration, temp, strain) feeding a live physics-informed AI twin for fault diagnosis \& curve dynamics. Extends bogie/FEM core. \textit{Evidence:} Zhang (2026), Dong (2026), Mutlu (2026) \href{https://journals.sagepub.com/doi/abs/10.1177/14759217261483593}{[2]}, \href{https://link.springer.com/article/10.1007/s12206-026-0906-5}{[3]}, \href{https://www.mdpi.com/2412-3811/11/3/87}{[4]}. \\
+\textbf{T3} & AI Visual Inspection of Track \& Wheels & 6 & Adjacent & On-board/wayside cameras with deep learning for real-time rail and wheel defect detection. Transfers \textit{SMAIL-AI} vision to rail. \textit{Evidence:} Kumar (2025) review; IBM 10-defect model \href{https://www.sciencedirect.com/science/article/pii/S2046043024000716}{[6]}. \\
+\textbf{T4} & Circular Rolling Stock (DfD) & 4 & Adjacent & Modular recyclable carbodies for end-of-life disassembly under EU mandates. \textit{Evidence:} Railsponsible Whitepaper (2024); SNCF 55 kt/yr reclamation; Tan (2025) \href{https://railsponsible.group/app/uploads/2024/09/20240910_Whitepaper-circularity_FINAL.pdf}{[7]}. \\
+\textbf{T5} & Autonomous Trains (GoA 3/4) & 6 & Transform. & Sensor-fusion perception for driverless mainline/freight rail. High safety certification shifts business model; builds on Trolley Bus autonomy. \textit{Evidence:} GoA 4 metros; Alstom DTO \href{https://www.alstom.com/autonomous-mobility-future-rail-automated}{[5]}. \\
+\textbf{T6} & Lightweight Carbody \& SMA Morphing & 4 & Adjacent & Bistable shape-memory-alloy actuators for active aero drag reduction on high-speed trains. Transfers \textit{ARIA} morphing. \textit{Evidence:} Riccio (2024) SMA spoiler \href{https://www.mdpi.com/2076-0825/13/9/330}{[8]}. \\
+\bottomrule
+\end{tabularx}
+\label{tab:radar}
+\end{table}
+
+\section{Recommended R\&D Project: AI-Driven Bogie Digital Twin (T2)}
+Following the requirement to recommend \textbf{one} trend, I select \textbf{T2: AI-Driven Bogie Digital Twin}, targeting progression from \textbf{TRL 5 to TRL 6--7} over a 24-month pilot.
+
+\textbf{Technical Architecture (2026 Scientific Baseline):} Moving beyond BLUE's offline FEM/multi-body simulations, T2 builds a live digital twin fed by bogie sensors (vibration, temperature, current, strain) across three layers: (1) \textbf{Multimodal Fault Diagnosis (TRL 4):} Using Zhang et al.\ (2026) \href{https://journals.sagepub.com/doi/abs/10.1177/14759217261483593}{[2]}, heterogeneous signals form a unified node-channel matrix modeled via a Hypergraph Kernel Neural Operator with Sparse Identification of Nonlinear Dynamics (\textit{HGKN-SINDy}) to learn a dynamic derivative baseline; deviations generate residual graph sequences classified by Multi-Scale Relation GraphSAGE (\textit{MSRGS}) across local, two-hop, and window views. (2) \textbf{Real-Time Curve Dynamics (TRL 5):} Using Dong et al.\ (2026) \href{https://link.springer.com/article/10.1007/s12206-026-0906-5}{[3]}, a twin-driven ML model (1 carbody, 2 bogies, 4 wheelsets) predicts wheel--rail forces in curves in real time. (3) \textbf{Maintenance Scheduling (TRL 3--4, early-stage package):} Using Mutlu (2026) \href{https://www.mdpi.com/2412-3811/11/3/87}{[4]}, Advantage Actor-Critic (\textit{A2C}) RL optimizes repair timing.
+
+\textbf{Strategic Fit \& Co-Funding:} T2 is \textbf{Adjacent}, turning BLUE's bogie/simulation core into a predictive service for rail OEMs. At \textbf{TRL 5}, BLUE can pair \textbf{EUR 300k--400k/yr} (its internal share) with \textit{Europe's Rail JU} (Flagship Area 3) or \textit{Regione Piemonte FESR} co-funding for a EUR 1.5M--2.5M demonstrator with Politecnico di Torino.
+
+\section{Keeping the Radar Alive: Automated Scouting with Human Gate}
+To keep the radar current with limited manual effort, a BPMN workflow links \path{data/trends.json} to the offline single-file dashboard (open \path{dashboard/index.html} by double-click, no server needed): monthly scripts scan papers, patents, and EU calls (via TinyFish/Exa APIs) and embed texts using \path{perplexity-ai/pplx-embed-v1-0.6b} into a RAG pre-screener. Using a versioned rubric (\path{trl_criteria_v1}), the LLM proposes TRL shifts with verbatim evidence quotes and confidence scores inside a lightweight \textit{Trend--Evidence--TRL--Capability} graph. Because TRL decisions carry grant liability, an R\&D engineer validates flagged diffs quarterly (human-in-the-loop) before rebuilding the dashboard.
+
+\end{document}

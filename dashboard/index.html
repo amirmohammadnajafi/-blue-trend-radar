@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLUE Engineering - Mini Trend Radar (Rail)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f4f6f8;color:#1a1a1a}
+header{background:#0b2a4a;color:#fff;padding:20px 28px}
+header h1{margin:0;font-size:22px}
+header p{margin:6px 0 0;font-size:13px;opacity:.9}
+main{padding:20px 28px;max-width:1100px;margin:auto}
+.card{background:#fff;border-radius:10px;padding:18px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+h2{font-size:17px;margin:0 0 10px;color:#0b2a4a}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border:1px solid #dde3ea;padding:8px;text-align:left;vertical-align:top}
+th{background:#0b2a4a;color:#fff}
+tr.rec td{background:#fff8e1}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;background:#e3ecf5;color:#0b2a4a}
+.star{color:#b8860b;font-weight:bold}
+#chart{width:100%;height:340px;border:1px solid #dde3ea;border-radius:8px;background:#fff}
+.detail{font-size:13px;line-height:1.6}
+.small{font-size:12px;color:#555}
+a{color:#0b5cab}
+footer{padding:16px 28px;font-size:12px;color:#555;text-align:center}
+</style>
+</head>
+<body>
+<header>
+<h1>BLUE Engineering - Mini Trend Radar: Rail (2026-2035)</h1>
+<p>6 technology trends for rolling stock &amp; infrastructure &bull; TRL per Horizon Europe/EC definitions &bull; Data mirrors <code>data/trends.json</code> &bull; Open this file by double-click (no server needed)</p>
+</header>
+<main>
+<div class="card">
+<h2>1. Radar view (x = TRL, y = category) - click a dot for details</h2>
+<svg id="chart" viewBox="0 0 700 340" role="img" aria-label="TRL vs category chart"></svg>
+<div id="sel" class="detail">Click any dot above.</div>
+</div>
+<div class="card">
+<h2>2. All trends</h2>
+<table id="tbl"><thead><tr><th>ID</th><th>Trend</th><th>TRL</th><th>Category</th><th>Horizon</th><th>Key source</th></tr></thead><tbody></tbody></table>
+<p class="small">TRLs are author assessments (papers rarely state TRL). Assumption noted in data file. Full justifications in repo.</p>
+</div>
+<div class="card">
+<h2>3. Recommended R&amp;D project: <span class="star">T2 AI-driven bogie digital twin</span></h2>
+<div class="detail">
+<p><b>What:</b> vibration/temperature/strain sensors on the bogie + live twin + AI (fault diagnosis, real-time curve dynamics, maintenance timing). Like a smartwatch for the bogie.</p>
+<p><b>Why now (TRL 5, Adjacent):</b> components validated in lab (Zhang TRL4, Dong TRL5, Mutlu TRL3-4); no fleet demo yet, so overall TRL 5 - the EU funding sweet spot (lab to pilot). Builds on BLUE bogie/simulation core for the same rail clients; predictive service itself is new.</p>
+<p><b>Evidence:</b>
+<a href="https://journals.sagepub.com/doi/abs/10.1177/14759217261483593">Zhang 2026 (AI)</a> &bull;
+<a href="https://link.springer.com/article/10.1007/s12206-026-0906-5">Dong 2026 (twin)</a> &bull;
+<a href="https://www.mdpi.com/2412-3811/11/3/87">Mutlu 2026 (decision)</a></p>
+<p><b>Demo data (proxy, not TRL evidence):</b> <a href="https://www.kaggle.com/datasets/ziya07/high-speed-train-bogie-vibration-and-fault-diagnosis">Kaggle bogie vibration dataset</a> for dashboard charts. Real pilot would use fleet data.</p>
+<p><b>Route:</b> ~750k/year internal (4% of 18.7M turnover) + EU co-funding (Europe's Rail JU / Horizon Europe) for a 24-month pilot from TRL 5 to 6-7 on a regional fleet.</p>
+</div>
+</div>
+<div class="card">
+<h2>4. How the radar stays alive</h2>
+<p class="detail">Scheduled scans (papers, patents, EU calls via search API) feed a RAG pre-screener that proposes TRLs with evidence quotes and confidence against EC criteria, checked via a small trend-evidence-TRL graph; an engineer validates quarterly before this dashboard updates. Automation covers screening only; final TRL decisions stay human.</p>
+</div>
+</main>
+<footer>Sources in data/trends.json &bull; Turnover 18.7M (2025, public registries), internal R&amp;D ~560-750k/year &bull; Single-file dashboard, offline capable.</footer>
+<script>
+var DATA=[
+{id:"T1",t:"Hydrogen fuel-cell trains",trl:7,cat:"Adjacent",h:"2030",url:"https://www.alstom.com/solutions/rolling-stock/alstom-coradia-ilint-worlds-1st-hydrogen-powered-passenger-train"},
+{id:"T2",t:"AI-driven bogie digital twin",trl:5,cat:"Adjacent",h:"2032",url:"https://journals.sagepub.com/doi/abs/10.1177/14759217261483593",rec:true},
+{id:"T3",t:"AI visual inspection track/wheels",trl:6,cat:"Adjacent",h:"2030",url:"https://research.ibm.com/blog/ai-model-discovers-railroad-defects-before-theyre-critical"},
+{id:"T4",t:"Circular rolling stock",trl:4,cat:"Adjacent",h:"2035",url:"https://railsponsible.group/app/uploads/2024/09/20240910_Whitepaper-circularity_FINAL.pdf"},
+{id:"T5",t:"Autonomous trains GoA3/GoA4",trl:6,cat:"Transformative",h:"2035",url:"https://www.alstom.com/autonomous-mobility-future-rail-automated"},
+{id:"T6",t:"Lightweight SMA morphing",trl:4,cat:"Adjacent",h:"2035",url:"https://www.mdpi.com/2076-0825/13/9/330"}];
+var svg=document.getElementById("chart"),tb=document.querySelector("#tbl tbody"),sel=document.getElementById("sel");
+var cats=["Core","Adjacent","Adjacent*","Transformative"];
+function X(trl){return 60+(trl-3)*(580/6);}
+function Y(cat){var i=cats.indexOf(cat);if(i<0)i=1;return 300-i*85;}
+svg.innerHTML='<line x1="60" y1="300" x2="640" y2="300" stroke="#999"/>'+
+[3,4,5,6,7,8,9].map(function(v){return '<text x="'+X(v)+'" y="322" font-size="11" text-anchor="middle">TRL '+v+'</text><line x1="'+X(v)+'" y1="40" x2="'+X(v)+'" y2="300" stroke="#eef"/>';}).join("")+
+cats.map(function(c,i){return '<text x="8" y="'+(Y(c)+4)+'" font-size="11">'+c+'</text>';}).join("");
+DATA.forEach(function(d){
+var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+c.setAttribute("cx",X(d.trl));c.setAttribute("cy",Y(d.cat));c.setAttribute("r",d.rec?11:8);
+c.setAttribute("fill",d.rec?"#b8860b":"#0b5cab");c.setAttribute("stroke","#fff");c.setAttribute("stroke-width","2");
+c.style.cursor="pointer";
+c.onclick=function(){sel.innerHTML="<b>"+d.id+" "+d.t+"</b> - TRL "+d.trl+", "+d.cat+", horizon "+d.h+(d.rec?" <span class='star'>RECOMMENDED</span>":"")+'<br><a href="'+d.url+'">key source</a>';};
+svg.appendChild(c);
+var t=document.createElementNS("http://www.w3.org/2000/svg","text");
+t.setAttribute("x",X(d.trl)+13);t.setAttribute("y",Y(d.cat)+4);t.setAttribute("font-size","11");t.textContent=d.id;
+svg.appendChild(t);
+var tr=document.createElement("tr");if(d.rec)tr.className="rec";
+tr.innerHTML="<td><span class='badge'>"+d.id+"</span>"+(d.rec?" <span class='star'>*</span>":"")+"</td><td>"+d.t+"</td><td>"+d.trl+"</td><td>"+d.cat+"</td><td>"+d.h+"</td><td><a href='"+d.url+"'>link</a></td>";
+tb.appendChild(tr);
+});
+</script>
+</body>
+</html>

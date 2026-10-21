@@ -1,0 +1,181 @@
+﻿{
+    "assumptions":  "TRLs are author assessments per Horizon Europe/EC definitions (EC FAQ + EURAXESS hardware scale); papers rarely state TRL. Full text of paywalled papers judged from metadata/abstracts. See information.md Section 11 for guide links.",
+    "funding_note":  "Internal R\u0026D ~560-750k/year (4% of 18.7M 2025 turnover); bigger pilots via EU co-funding (Europe\u0027s Rail JU / Horizon Europe).",
+    "recommendation":  "T2",
+    "sector":  "Rail (railway: train, tram, metro, rolling stock, bogie, infrastructure)",
+    "trend_count":  6,
+    "trends":  [
+                   {
+                       "category":  "Adjacent",
+                       "category_justification":  "Hydrogen bus experience (B4IA) transfers; rail application is new, same technology family and clients.",
+                       "description":  "Hydrogen fuel-cell trains for regional and shunting services where electrification is uneconomic. Only water as exhaust.",
+                       "horizon":  "2030",
+                       "id":  "T1",
+                       "recommended":  false,
+                       "sources":  [
+                                       {
+                                           "note":  "World\u0027s first hydrogen passenger train",
+                                           "url":  "https://www.alstom.com/solutions/rolling-stock/alstom-coradia-ilint-worlds-1st-hydrogen-powered-passenger-train",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "10,000+ passengers in the Americas, hydrogen mobility award",
+                                           "url":  "https://www.alstom.com/press-releases-news/2024/4/alstoms-coradia-ilint-first-hydrogen-powered-train-service-americas-wins-hydrogen-mobility-award-canadian-hydrogen-convention-2024",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "4+ years safe operation in Germany",
+                                           "url":  "https://railroads.dot.gov/sites/fra.dot.gov/files/2023-06/Lessons%20Learned%20and%20Best%20Practices%20from%204%2B%20Years%20of%20Safe%20Operation%20of%20iLint%20Hydrogen%20Fueled%20Train%20in%20Germany.pdf",
+                                           "year":  2023
+                                       }
+                                   ],
+                       "title":  "Hydrogen fuel-cell trains",
+                       "trl":  7,
+                       "trl_justification":  "Operational prototype with years of passenger service (Germany + Americas). Not yet fleet-wide commercial, so 7 not 8."
+                   },
+                   {
+                       "category":  "Adjacent",
+                       "category_justification":  "Builds on BLUE bogie/simulation core for the same rail clients; predictive service itself is new (not sold today).",
+                       "demo_dataset":  {
+                                            "note":  "Proxy for dashboard demo only, NOT TRL evidence. Real pilot would use fleet vibration data.",
+                                            "url":  "https://www.kaggle.com/datasets/ziya07/high-speed-train-bogie-vibration-and-fault-diagnosis"
+                                        },
+                       "description":  "Live virtual replica of the bogie (frame, wheels, suspension) fed by vibration/temperature/strain sensors. AI predicts failures weeks ahead and optimises maintenance timing.",
+                       "horizon":  "2032",
+                       "id":  "T2",
+                       "recommended":  true,
+                       "sources":  [
+                                       {
+                                           "note":  "HGKN-SINDy + residual graphs for high-speed bogie fault diagnosis (AI layer)",
+                                           "url":  "https://journals.sagepub.com/doi/abs/10.1177/14759217261483593",
+                                           "year":  2026
+                                       },
+                                       {
+                                           "note":  "Digital-twin ML for real-time curve-negotiation dynamics (twin layer)",
+                                           "url":  "https://link.springer.com/article/10.1007/s12206-026-0906-5",
+                                           "year":  2026
+                                       },
+                                       {
+                                           "note":  "A2C reinforcement learning + digital twins for maintenance decisions (decision layer)",
+                                           "url":  "https://www.mdpi.com/2412-3811/11/3/87",
+                                           "year":  2026
+                                       }
+                                   ],
+                       "title":  "AI-driven bogie digital twin",
+                       "trl":  5,
+                       "trl_justification":  "Components validated in lab (Zhang TRL4, Dong TRL5, Mutlu TRL3-4); integrated system in simulated lab environment, no fleet demo, so overall TRL 5 per EC/EURAXESS scale."
+                   },
+                   {
+                       "category":  "Adjacent",
+                       "category_justification":  "Drone + AI capability from SMAIL-AI transfers; rolling-stock application is new (SMAIL-AI covers power lines, not trains).",
+                       "description":  "Cameras on trains/track plus machine vision to detect rail, fastener and wheel defects in real time, complementing human inspection.",
+                       "horizon":  "2030",
+                       "id":  "T3",
+                       "recommended":  false,
+                       "sources":  [
+                                       {
+                                           "note":  "Review of defect detection in tracks and rolling stock",
+                                           "url":  "https://www.sciencedirect.com/science/article/pii/S2046043024000716",
+                                           "year":  2025
+                                       },
+                                       {
+                                           "note":  "10-defect model, Bane NOR Norway, deployed in Maximo",
+                                           "url":  "https://research.ibm.com/blog/ai-model-discovers-railroad-defects-before-theyre-critical",
+                                           "year":  2025
+                                       },
+                                       {
+                                           "note":  "97.8% vs 60-85% human (vendor claim, Oxmaint)",
+                                           "url":  "https://oxmaint.com/sap-integration/ai-vision-drone-railway-defect-detection-inspection",
+                                           "year":  2025
+                                       }
+                                   ],
+                       "title":  "AI visual inspection of track and wheels",
+                       "trl":  6,
+                       "trl_justification":  "Prototypes demonstrated in relevant environments (IBM model, drone pilots, SMAIL-AI active 2025-27). Not fleet commercial, so 6 not 7."
+                   },
+                   {
+                       "category":  "Adjacent (borderline transformative)",
+                       "category_justification":  "Design skill is core but circular lifecycle service is new; business model shifts toward lifecycle, same clients.",
+                       "description":  "Design for disassembly with recyclable interiors and carbodies so end-of-life trains become material banks instead of waste.",
+                       "horizon":  "2035",
+                       "id":  "T4",
+                       "recommended":  false,
+                       "sources":  [
+                                       {
+                                           "note":  "DFD + 10R review for TRACK infrastructure (concept transfers to carbody disassembly)",
+                                           "url":  "https://www.sciencedirect.com/science/article/pii/S2214391225001965",
+                                           "year":  2025
+                                       },
+                                       {
+                                           "note":  "20-page circularity whitepaper for rolling stock",
+                                           "url":  "https://railsponsible.group/app/uploads/2024/09/20240910_Whitepaper-circularity_FINAL.pdf",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "Eco-design as core R\u0026D pathway",
+                                           "url":  "https://www.alstom.com/company/sustainability/environment/eco-design-pathway-towards-sustainable-mobility",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "55k tonnes disassembled yearly",
+                                           "url":  "https://www.groupe-sncf.com/en/commitments/sustainable-development/circular-economy",
+                                           "year":  2024
+                                       }
+                                   ],
+                       "title":  "Circular rolling stock (design for disassembly)",
+                       "trl":  4,
+                       "trl_justification":  "Methods and whitepapers validated in lab; SNCF disassembly is end-of-life practice, design of new circular stock still low-fidelity, so TRL 4."
+                   },
+                   {
+                       "category":  "Transformative",
+                       "category_justification":  "Driverless operation changes regulation, operations and business model; far from current design contracting.",
+                       "description":  "Grades of Automation GoA3 (driverless with attendant) to GoA4 (unattended) for metros first, then freight and regional lines.",
+                       "horizon":  "2035",
+                       "id":  "T5",
+                       "recommended":  false,
+                       "sources":  [
+                                       {
+                                           "note":  "List of GoA3/GoA4 driverless systems",
+                                           "url":  "https://en.wikipedia.org/wiki/List_of_driverless_train_systems",
+                                           "year":  2025
+                                       },
+                                       {
+                                           "note":  "Driverless operation GoA3 vs GoA4",
+                                           "url":  "https://www.alstom.com/autonomous-mobility-future-rail-automated",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "Market $10.92B 2026 to $21.67B 2034",
+                                           "url":  "https://www.fortunebusinessinsights.com/autonomous-train-market-105494",
+                                           "year":  2026
+                                       }
+                                   ],
+                       "title":  "Autonomous trains (GoA3/GoA4)",
+                       "trl":  6,
+                       "trl_justification":  "GoA4 metros operational (TRL 7) but mainline/freight still in testing (TRL 4-5); trend overall demonstrated in relevant environment, so TRL 6 with metro/mainline note."
+                   },
+                   {
+                       "category":  "Adjacent",
+                       "category_justification":  "Shape-memory alloy experience from ARIA transfers; rail application is new.",
+                       "description":  "Lightweight structures with shape-memory-alloy morphing elements for adaptive aerodynamics and vibration control on rolling stock.",
+                       "horizon":  "2035",
+                       "id":  "T6",
+                       "recommended":  false,
+                       "sources":  [
+                                       {
+                                           "note":  "SMA bistable morphing spoiler for adaptive aerodynamics",
+                                           "url":  "https://www.mdpi.com/2076-0825/13/9/330",
+                                           "year":  2024
+                                       },
+                                       {
+                                           "note":  "SMA model, BLUE co-authors Giamundo/Visone (Pomigliano)",
+                                           "url":  "https://pmc.ncbi.nlm.nih.gov/articles/PMC10343273/",
+                                           "year":  2023
+                                       }
+                                   ],
+                       "title":  "Lightweight SMA morphing structures",
+                       "trl":  4,
+                       "trl_justification":  "Lab validation (Riccio/Battaglia + BLUE ARIA); no rail deployment, so TRL 4."
+                   }
+               ]
+}
